@@ -12,14 +12,14 @@ sections:
       bg_image: "/img/look_at_the_sky.jpg"
       photographer: "Teddy Kelley : @teddykelley"
       overlay: rgb(87, 82, 0)
-    - template: one_column_section
+    - template: one_column
       bg_class: white
       paragraph: Oui, ça n'a pas l'air sérieux dit comme ça. Mais où irait-on si on ne
           levait jamais la tête vers les étoiles ? Il est temps de réaliser que les promesses
           du cloud et des architectures serverless sont déjà tenues. Pour s'en convaincre,
           démarrer notre série ['Going serverless'](/blog/going-serverless) qui va examiner semaines
           après semaines les différents composants de cette révolution transparente.
-    - template: two_columns_call_to_action
+    - template: two_columns
       bg_class: gradient2
       title: Vous désirez déployer votre propre site statique ?
       tagline: Nous pouvons le mettre en oeuvre en quelques jours après avoir étudié votre
