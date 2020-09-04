@@ -28,5 +28,6 @@ fields:
   description: Add any sections you need to build your page or article.
   template_types:
   - hero-intro
+  - two-columns
   - three-columns
   - one-column
