@@ -14,6 +14,17 @@ sections:
   paragraph: An the world is still spinning
   bg_video: ''
   overlay_opacity: ''
+- template: one-column
+  bg_class: white
+  content: "## TLDR;\n\nThe word \\`serverless\\` really doesn't account well for
+    the reality of the new paradigm we are talking about.\n\nIt would be better suited
+    perhaps to speak of invisible or transparent servers !  \nBecause of course, they
+    are still there, in the moving reality of the cloud. But in fact, they are just
+    doing there job and it's not a matter anymore to take consider.."
+  bg_image: ''
+  bg_video: ''
+  overlay: ''
+  overlay_opacity: ''
 - template: two-columns
   bg_class: gradient2
   title: Vous désirez déployer votre propre site statique ?
