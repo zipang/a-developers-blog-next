@@ -1,0 +1,21 @@
+---
+label: One column
+hide_body: false
+fields:
+- type: textarea
+  config:
+    wysiwyg: true
+    schema:
+      format: markdown
+    required: true
+  label: Paragraph
+  name: paragraph
+  description: A rich text section
+- type: text
+  name: video
+  label: Video
+  description: A video link to embed after the paragrapg
+- type: include
+  name: background
+  label: Background
+  template: background

@@ -1,0 +1,21 @@
+---
+label: Hero Intro
+hide_body: true
+display_field: title
+fields:
+- type: text
+  name: title
+  label: Title
+  description: A big H1 title in the intro section
+- type: textarea
+  name: paragraph
+  label: Text
+  config:
+    wysiwyg: true
+    schema:
+      format: markdown
+  description: Additional rich text content for the intro section
+- type: include
+  template: background
+  label: Background
+  name: background

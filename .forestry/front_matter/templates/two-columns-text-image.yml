@@ -1,0 +1,49 @@
+---
+label: Two columns (text+image)
+hide_body: false
+display_field: title
+fields:
+- type: text
+  name: title
+  label: Title
+  description: 'A big <h2> title '
+- type: textarea
+  name: paragraph
+  label: Paragraph
+  description: A nice text regarding an image
+  config:
+    wysiwyg: true
+    schema:
+      format: markdown
+    required: true
+- type: select
+  name: text_position
+  config:
+    source:
+      type: simple
+    options:
+    - text_first
+    - text_last
+  label: Text position
+  default: text_first
+- type: file
+  name: image
+  label: Image
+  description: An image in its own column or the vignette to launch a video
+- type: text
+  name: media_title
+  label: Media Title
+  description: For SEO purposes it is extremely recommended to indicate a title or
+    alt attribute for any images
+- type: text
+  name: link
+  label: Link
+  description: Video link or call to action link
+- type: text
+  name: call_to_action
+  label: Call to Action
+  description: A big action button with an invitation
+- type: include
+  name: background
+  label: Background
+  template: background

@@ -1,0 +1,38 @@
+---
+label: Background
+hide_body: false
+display_field: bg_class
+fields:
+- type: select
+  name: bg_class
+  config:
+    source:
+      type: simple
+    required: false
+    options:
+    - white
+    - grey
+    - fixed-bg
+    - parallax-bg
+    - video-bg
+  label: Background
+  description: Select the type of background for this section
+  default: white
+- type: file
+  name: bg_image
+  label: Image background
+  description: Choose an image to apply for the parallax or fixed image backgrounds
+- type: text
+  name: bg_video
+  label: Background video
+  description: Alternatively choose the URL of a background video to play
+- type: color
+  name: overlay
+  config:
+    color_format: Hex
+  label: Overlay color
+  description: Should we cover the background with a semi-transparent overlay ?
+- type: text
+  name: overlay_opacity
+  label: Overlay Opacity
+  description: 0=transparent, 1=opaque

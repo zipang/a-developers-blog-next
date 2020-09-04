@@ -1,0 +1,35 @@
+---
+label: Menu
+hide_body: true
+fields:
+- type: text
+  name: description
+  label: Description
+  description: Describe the purpose of this navigation menu
+  config:
+    required: true
+- type: field_group_list
+  name: entries
+  label: Entries
+  description: Menu entries are links with a text to be displayed
+  fields:
+  - type: text
+    name: link
+    label: Link
+    description: A link to a page (/page)
+    config:
+      required: true
+  - type: text
+    name: text
+    label: Text
+    description: The text that is displayed
+    config:
+      required: true
+  config:
+    labelField: text
+- type: boolean
+  name: global
+  label: Global
+  description: This means that a menu is a global property of the site
+  hidden: true
+  default: true

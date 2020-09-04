@@ -1,0 +1,35 @@
+---
+label: Metadata
+hide_body: true
+fields:
+- type: text
+  name: title
+  label: Title
+  description: Usefull to identify the content
+  config:
+    required: true
+- type: field_group_list
+  name: fields
+  label: Fields
+  description: All these field will be added as metadata in the <head> section
+  fields:
+  - type: text
+    name: key
+    label: Key
+    config:
+      required: true
+  - type: textarea
+    name: value
+    label: Value
+    config:
+      wysiwyg: true
+      schema:
+        format: markdown
+  config:
+    labelField: key
+- type: boolean
+  hidden: true
+  label: Global
+  name: global
+  default: true
+  description: This means that all these properties will be shared on all pages

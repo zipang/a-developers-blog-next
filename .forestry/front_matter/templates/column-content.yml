@@ -1,0 +1,24 @@
+---
+label: Column content
+hide_body: false
+display_field: column_title
+fields:
+- type: text
+  name: column_title
+  label: Column title
+- type: file
+  name: column_image
+  label: Column Image
+  description: An optional image content
+- type: textarea
+  name: column_content
+  label: Column Content
+  description: More rich text for this column
+  config:
+    wysiwyg: true
+    schema:
+      format: markdown
+- type: text
+  name: link
+  label: Link
+  description: Use the whole card as a page link
