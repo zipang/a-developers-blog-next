@@ -14,6 +14,10 @@ sections:
   paragraph: An the world is still spinning
   bg_video: ''
   overlay_opacity: ''
+  content: ''
+  text: See our articles
+  link: "/blog"
+  style: secondary
 - template: one-column
   bg_class: white
   content: "## TLDR;\n\nThe word \\`serverless\\` really doesn't account well for
