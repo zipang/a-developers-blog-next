@@ -1,4 +1,31 @@
 ---
 label: Call to action
 hide_body: true
-fields: []
+fields:
+- name: text
+  type: text
+  config:
+    required: true
+  label: Text
+  description: The text on the button
+- name: link
+  type: text
+  config:
+    required: false
+  label: Link
+  description: The relative or absolute link to follow
+- name: style
+  type: select
+  default: primary
+  config:
+    required: false
+    options:
+    - primary
+    - secondary
+    source:
+      type: simple
+      section: 
+      file: 
+      path: 
+  label: Style
+  description: Of course, we have several styles for them
