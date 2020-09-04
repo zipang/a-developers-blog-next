@@ -19,3 +19,8 @@ fields:
   template: background
   label: Background
   name: background
+- name: call_to_action
+  type: include
+  config: {}
+  template: call-to-action
+  label: Call to action
