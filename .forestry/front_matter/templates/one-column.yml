@@ -2,15 +2,6 @@
 label: One column
 hide_body: false
 fields:
-- type: textarea
-  config:
-    wysiwyg: true
-    schema:
-      format: markdown
-    required: true
-  label: Paragraph
-  name: paragraph
-  description: A rich text section
 - type: text
   name: video
   label: Video
