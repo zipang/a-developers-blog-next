@@ -31,3 +31,5 @@ fields:
   - two-columns
   - three-columns
   - one-column
+pages:
+- content/index.md
