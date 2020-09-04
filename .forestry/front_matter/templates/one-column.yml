@@ -19,3 +19,13 @@ fields:
   name: background
   label: Background
   template: background
+- name: markdown
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: true
+    schema:
+      format: markdown
+  label: Content
+  description: Some rich text (markdonw enabled)
