@@ -14,7 +14,7 @@ sections:
       overlay: rgb(87, 82, 0)
     - template: one-column
       bg_class: white
-      paragraph: Oui, ça n'a pas l'air sérieux dit comme ça. Mais où irait-on si on ne
+      content: Oui, ça n'a pas l'air sérieux dit comme ça. Mais où irait-on si on ne
           levait jamais la tête vers les étoiles ? Il est temps de réaliser que les promesses
           du cloud et des architectures serverless sont déjà tenues. Pour s'en convaincre,
           démarrer notre série ['Going serverless'](/blog/going-serverless) qui va examiner
