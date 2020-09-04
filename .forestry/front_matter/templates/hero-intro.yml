@@ -8,8 +8,8 @@ fields:
   label: Title
   description: A big H1 title in the intro section
 - type: textarea
-  name: paragraph
-  label: Text
+  name: content
+  label: Content
   config:
     wysiwyg: true
     schema:
