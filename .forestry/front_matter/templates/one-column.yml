@@ -10,7 +10,7 @@ fields:
   name: background
   label: Background
   template: background
-- name: markdown
+- name: content
   type: textarea
   default: ''
   config:
@@ -19,4 +19,4 @@ fields:
     schema:
       format: markdown
   label: Content
-  description: Some rich text (markdonw enabled)
+  description: Some rich text (markdown enabled)
