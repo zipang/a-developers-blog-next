@@ -2,14 +2,6 @@
 label: One column
 hide_body: false
 fields:
-- type: text
-  name: video
-  label: Video
-  description: A video link to embed after the paragrapg
-- type: include
-  name: background
-  label: Background
-  template: background
 - name: content
   type: textarea
   default: ''
@@ -20,3 +12,7 @@ fields:
       format: markdown
   label: Content
   description: Some rich text (markdown enabled)
+- type: include
+  name: background
+  label: Background
+  template: background
