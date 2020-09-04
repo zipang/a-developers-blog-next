@@ -2,33 +2,32 @@
 label: Page
 hide_body: true
 fields:
-    - name: title
-      label: Title
-      type: text
-      hidden: false
-      default: ""
-    - type: text
-      name: template
-      label: Template
-      default: free-page
-      hidden: true
-    - name: resume
-      label: Resume
-      type: text
-      hidden: false
-      default: ""
-      description: A resume of the page content (for Google page indexation)
-    - type: tag_list
-      name: keywords
-      label: Keywords
-      description: These keywords are used for the search engines.
-    - type: blocks
-      name: sections
-      label: Sections
-      description: Add any sections you need to build your page or article
-      template_types:
-          - hero-intro
-          - two-columns-text-image
-          - three-columns
-          - one-column
-pages:
+- name: title
+  label: Title
+  type: text
+  hidden: false
+  default: ''
+- type: text
+  name: template
+  label: Template
+  default: free-page
+  hidden: true
+- name: resume
+  label: Resume
+  type: text
+  hidden: false
+  default: ''
+  description: A resume of the page content (for Google page indexation)
+- type: tag_list
+  name: keywords
+  label: Keywords
+  description: These keywords are used for the search engines.
+- type: blocks
+  name: sections
+  label: Sections
+  description: Add any sections you need to build your page or article
+  template_types:
+  - hero-intro
+  - two-columns-text-image
+  - three-columns
+  - one-column
