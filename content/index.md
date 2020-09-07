@@ -5,7 +5,7 @@ resume: 'Le site personnel de zipang (Christophe Desguez) sur les technos qui l'
   : #JAMStack, Serverless architectures'
 sections:
 - template: hero-intro
-  title: WE ARE SERVERLESS
+  title: THE SERVERLESS REVOLUTION
   headline: Ca regarde les étoiles et ça parle de serveurs transparents
   bg_class: parallax-bg
   bg_image: "/img/look_at_the_sky.jpg"
@@ -14,7 +14,7 @@ sections:
   paragraph: An the world is still spinning
   bg_video: ''
   overlay_opacity: ''
-  content: ''
+  content: "Transparent servers are here..  \nTo stay."
   text: See our articles
   link: "/blog"
   style: secondary
@@ -51,7 +51,14 @@ sections:
   link: ''
   bg_video: ''
   overlay_opacity: ''
-keywords: []
+keywords:
+- jamstack
+- " reactjs"
+- serverless
+- javascript
+- web design
+- product design
+- nodejs
 
 ---
 Is this the paragraph of my one column section ?
