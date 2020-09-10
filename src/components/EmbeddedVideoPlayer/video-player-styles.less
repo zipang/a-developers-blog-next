@@ -1,0 +1,26 @@
+.video-player-wrapper {
+	position: relative;
+
+	.react-player__play-icon {
+		border-width: 32px 0px 32px 50px;
+	}
+
+	> div, .video-player {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}
+.video-player-wrapper::before {
+	content: "";
+	width: 1px;
+	margin-left: -1px;
+	float: left;
+	height: 0;
+	padding-top: 9 / 16 * 100%; /* Aspect ratio */
+}
+.video-player-wrapper::after { /* to clear float */
+	content: "";
+	display: table;
+	clear: both;
+}

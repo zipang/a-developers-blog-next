@@ -1,0 +1,32 @@
+.show-more {
+	display: block;
+	position: absolute;
+	width: 64px; height: 64px;
+	bottom: 40px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 100;
+
+	&.bouncing {
+		animation-duration: 700ms;
+		animation-name: bouncing;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+@keyframes bouncing {
+	from {
+		animation-timing-function: ease-in;
+		bottom:50px
+	}
+	to {
+		animation-timing-function: ease-out;
+		bottom:40px
+	}
+}
