@@ -1,0 +1,28 @@
+@import "../../layouts/layout-vars.less";
+
+section.three-columns {
+	.ant-card {
+		background-color:white;
+		border-radius: 15px;
+		margin: 1em 0;
+		@media only screen and (min-width : 768px) {
+			margin: 0;
+		}
+	}
+	.ant-card-bordered {
+	 	border: 1px solid #c4dbdb;
+	}
+
+	.ant-card-hoverable { // these cards are clickable
+		box-shadow: 3px 2px 2px @highlight-color;
+		.ant-card-head-wrapper {
+			//
+			text-align: center;
+		}
+		&:active, &:hover {
+			background: @primary-light;
+			box-shadow: 3px 2px 5px @highlight-color;
+			border: 1px solid white;
+		}
+	}
+}

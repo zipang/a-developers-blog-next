@@ -1,0 +1,91 @@
+@import "../layouts/layout-vars.less";
+
+/**
+ * Prevent horizontal scrollbar
+ * Note : see bug description on stackoverflow if we wrote these rules on html and body
+ * @see https://stackoverflow.com/questions/28050548/window-pageyoffset-is-always-0-with-overflow-x-hidden
+ */
+#___gatsby {
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+section {
+
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+
+	background-color: white;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	&.fixed-bg {
+		background-attachment: fixed;
+	}
+
+	&.fixed-bg, &.parallax-bg, &.video-bg {
+		h1, h2, p {
+			color: white;
+		}
+	}
+
+	.overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		opacity: 0.3;
+		z-index: 1;
+	}
+
+	.content {
+		padding: 4em 2em;
+		min-width: 50%;
+		min-height: 30%;
+		z-index: 5;
+
+		max-width: 97%;
+		@media only screen and (min-width : @lg) {
+			max-width: 80%;
+		}
+		@media only screen and (min-width : @xl) {
+			max-width: 1140px;
+		}
+
+		&.error {
+			color: red;
+			background-color: orange;
+		}
+
+		h1, h2 {
+			display: block;
+			width: 100%;
+			text-align: center;
+		}
+	}
+
+	blockquote p {
+		padding: 1em;
+		border-left: 2px solid grey;
+		background-color: #eee;
+	}
+
+	&.grey {
+		background-color: rgba(99, 220, 250, 0.2);
+		blockquote p {
+			background-color: rgba(99, 220, 250, 0.2);
+		}
+	}
+
+	&:focus {
+		outline: none;
+		border-top: 2px solid lightslategray;
+		border-bottom: 2px solid lightslategray;
+	}
+}

@@ -1,0 +1,44 @@
+
+section.hero {
+
+	min-height: 100vh;
+	&.mini {
+		min-height: 75vh;
+	}
+	transform: translateZ(0);
+
+	.content {
+
+		padding: 0 10%;
+
+		h1 {
+			font-size: 2.5em;
+			font-weight: 400;
+			text-transform: uppercase;
+			line-height: 1.5em;
+
+			@media only screen and (min-width : 1200px) {
+				font-size: 3em;
+			}
+		}
+
+		p {
+			line-height: 1.7em;
+
+			@media only screen and (min-width : 1200px) {
+				line-height: 2em;
+				font-size: 1.5em;
+			}
+		}
+	}
+
+	&.video-bg {
+		@media only screen and (min-width : 984px) {
+			.show-more {
+				display: none; // don't display the scroll down indicator when video is playing
+			}
+		}
+	}
+
+}
+
