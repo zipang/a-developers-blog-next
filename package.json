@@ -1,6 +1,7 @@
 {
 	"name": "next-jamstack-starter",
 	"private": true,
+	"type": "module",
 	"workspaces": [
 		"packages/*"
 	],
