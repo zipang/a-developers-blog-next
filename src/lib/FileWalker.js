@@ -1,4 +1,5 @@
 import fs from "fs-extra";
+import EventEmitter from "events";
 import { relative, basename, extname, dirname } from "path";
 
 const VFilePropertyHandler = {

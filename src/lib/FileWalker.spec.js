@@ -1,8 +1,11 @@
-import FileWalker from "./FileWalker";
+import FileWalker from "./FileWalker.js";
 import test from "baretest";
-import { expect } from "@hapi/code";
+import code from "@hapi/code";
 
-test("FileWalker will throw on not existing dir", () => {
+const { expect } = code;
+const testSuite = test("FileWalker");
+
+testSuite("FileWalker will throw on not existing dir", () => {
 	const badInstantiation = () => {
 		const walker = new FileWalker("toto");
 	};
@@ -10,4 +13,4 @@ test("FileWalker will throw on not existing dir", () => {
 	expect(badInstantiation).to.throw();
 });
 
-test.arguments();
+testSuite.run();
