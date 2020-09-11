@@ -1,0 +1,6 @@
+{
+	"error": {
+		"NO_TARGET": "No target specified for Intersection Observer. @see: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Creating_an_intersection_observer",
+		"NO_EVENT_HANDLER": "No event handler specified for Intersection Observer. @see: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Creating_an_intersection_observer"
+	}
+}
