@@ -1,0 +1,14 @@
+{
+  "name": "vfile-mapper",
+  "version": "0.1.0",
+  "description": "Scan directory of files, parse front-matter and make them available as collections of ready to use data",
+  "main": "index.js",
+  "author": "zipang (Christophe Desguez)",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "gray-matter": "^4.0.2",
+    "vfile": "^4.2.0",
+    "walker": "^1.0.7"
+  }
+}

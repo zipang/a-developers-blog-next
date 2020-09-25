@@ -3,11 +3,11 @@ import chokidar from "chokidar";
 /**
  *
  * @param {String} dir - full path of the directory to watch
- * @param {String} glob - a glob pattern like **/*.md
+ * @param {String} glob - a glob pattern like **\/*.md
  */
 export const watchContent = async (dir, glob) => {
 	return chokidar
-		.watch("**/*.[md|markdown]", {
+		.watch(glob, {
 			cwd: dir
 		})
 		.on("add", (path) => {

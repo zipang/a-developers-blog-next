@@ -26,11 +26,11 @@ const VFilePropertyHandler = {
  * @example
  *   const readmeFile = VFile("/project/readme.md")
  *   console.log(readmeFile.extname) // "md"
- *   console.log(readmeFile.extname) // "readme"
+ *   console.log(readmeFile.basename) // "readme"
  *   console.log(readmeFile.dirname) // "project"
  * @param {String} path
  */
-const VFile = (path) => new Proxy(path, VFilePropertyHandler);
+export const VFile = (path) => new Proxy(path, VFilePropertyHandler);
 
 /**
  * Build a quick file filter based on accepted extensions
