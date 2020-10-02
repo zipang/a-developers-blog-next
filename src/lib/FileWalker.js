@@ -39,7 +39,6 @@ export class FileWalker extends EventEmitter {
 	constructor({ filterFiles, filterDirs } = _DEFAULT_OPTIONS) {
 		super();
 
-		this._fileCount = 0;
 		this.filterFiles(filterFiles).filterDirs(filterDirs);
 	}
 
@@ -73,6 +72,8 @@ export class FileWalker extends EventEmitter {
 				`FileWalker() The directory to explore doesn't exist. (${dir}/)`
 			);
 		}
+
+		this._fileCount = 0;
 
 		try {
 			const entries = await fs.readdir(dir, { withFileTypes: true });
