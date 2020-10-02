@@ -1,10 +1,17 @@
-import { VFile } from "./FileWalker.js";
-import path from "path";
+import path, { dirname } from "path";
+import VFile from "./VFile.js";
+import { getStaticPaths } from "./FileWalker.js";
+import { fileURLToPath } from "url";
 
-const f = VFile(path.join(__dirname, "FileWalker.spec.js"));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-console.dir(process.env);
+const specFile = path.join(__dirname, "FileWalker.spec.js");
 
-console.log(`f : ${f}`);
-console.log(`f.extname : ${f.extname}`);
-console.log(`f.basename : ${f.basename}`);
+console.log(`Current dir : ${__dirname}`);
+console.log(`File : ${specFile}`);
+
+// Filter spec files inside this dir
+const specFiles = getStaticPaths(__dirname, ["spec.js"]);
+console.log(`Here are the spec files found inside this dir :
+- ${specFiles.join("\n")}`);

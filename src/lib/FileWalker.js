@@ -1,51 +1,26 @@
-import fs from "fs-extra";
+import fs from "fs";
 import EventEmitter from "events";
-import { relative, basename, extname, dirname } from "path";
-
-const VFilePropertyHandler = {
-	get: (target, property) => {
-		switch (property) {
-			case "basename":
-				return basename(target);
-				break;
-			case "extname":
-				return extname(target);
-				break;
-			case "dirname":
-				return dirname(target);
-				break;
-
-			default:
-				return `Unknown property ${property} called on VFile`;
-		}
-	}
-};
-
-/**
- * A proxy to easily read properties of a file
- * @example
- *   const readmeFile = VFile("/project/readme.md")
- *   console.log(readmeFile.extname) // "md"
- *   console.log(readmeFile.basename) // "readme"
- *   console.log(readmeFile.dirname) // "project"
- * @param {String} path
- */
-export const VFile = (path) => new Proxy(path, VFilePropertyHandler);
+import VFile from "./VFile.js";
 
 /**
  * Build a quick file filter based on accepted extensions
  * @param  {...string} extensions - accepted extensions
+ * @return Function(<VFile|String>)
  */
-export const hasExtensions = (...extensions) => (vfile) => extensions.find(vfile.extname);
+export const hasExtension = (...extensions) => (vfile) => {
+	if (!vfile) return false;
+	const filename = typeof vfile === "string" ? vfile : vfile.filename;
+	return extensions.some((ext) => filename.endsWith(ext));
+};
 
 /**
  * Common and useful file filters
  * Each file filter receive a VFile object as parameter and must return a boolean to accept or reject the file
  */
 export const fileFilters = {
-	isMarkdown: hasExtensions("md", "markdown"),
-	isText: hasExtensions("txt"),
-	isHidden: (vfile) => vfile.basename
+	isMarkdown: hasExtension("md", "markdown"),
+	isText: hasExtension("txt"),
+	isHidden: (vfile) => vfile.name.startsWith(".")
 };
 
 const _DEFAULT_OPTIONS = {
@@ -53,30 +28,38 @@ const _DEFAULT_OPTIONS = {
 	filterDirs: () => true
 };
 
+/**
+ * @class FileWalker
+ */
 export class FileWalker extends EventEmitter {
 	/**
 	 * Build a new file walker event emitter
-	 * @param {String} dir
 	 * @param {FileWalkerOptions} options
 	 */
-	constructor(dir, { filterFiles, filterDirs } = _DEFAULT_OPTIONS) {
+	constructor({ filterFiles, filterDirs } = _DEFAULT_OPTIONS) {
 		super();
-		// Check that we can really do this
-		if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) {
-			throw new Error(
-				`FileWalker() The directory to scan doesn't exist. (${dir}/)`
-			);
-		}
-		if (typeof filterFiles !== "function" || typeof filterFiles !== "function") {
+
+		this._fileCount = 0;
+		this.filterFiles(filterFiles).filterDirs(filterDirs);
+	}
+
+	filterFiles(fn) {
+		if (typeof fn !== "function") {
 			throw new TypeError(
-				`FileWalker() The 'filterFiles' and 'filterDirs' optional handlers must be functions`
+				`FileWalker() The 'filterFiles' and 'filterDirs' must be functions`
 			);
 		}
-		this.root = dir;
-		this.fileCount = 0;
-		this.filterFiles = filterFiles;
-		this.filterDirs = filterDirs;
-		this.explore(dir);
+		this._filterFiles = fn;
+		return this;
+	}
+	filterDirs(fn) {
+		if (typeof fn !== "function") {
+			throw new TypeError(
+				`FileWalker() The 'filterFiles' and 'filterDirs' must be functions`
+			);
+		}
+		this._filterDirs = fn;
+		return this;
 	}
 
 	/**
@@ -84,19 +67,26 @@ export class FileWalker extends EventEmitter {
 	 * @param {String} dir - full path
 	 */
 	async explore(dir) {
+		// Check that this directory really exists
+		if (!dir || !fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) {
+			throw new Error(
+				`FileWalker() The directory to explore doesn't exist. (${dir}/)`
+			);
+		}
+
 		try {
 			const entries = await fs.readdir(dir, { withFileTypes: true });
-			this.fileCount += entries.length;
+			this._fileCount += entries.length;
 
 			for (const entry of entries) {
 				if (entry.isFile()) {
 					// Emit a `file` event if it conforms to the spec
-					if (this.filterFiles(VFile(entry.name))) {
-						this.emit("file", relative(this.root, entry.name));
+					if (this._filterFiles(VFile(entry.name))) {
+						this.emit("file", relative(dir, entry.name));
 					}
 				} else if (entry.isDirectory()) {
-					if (this.filterDirs(VFile(entry.name))) {
-						this.emit("dir", relative(this.root, entry.name) + "/");
+					if (this._filterDirs(VFile(entry.name))) {
+						this.emit("dir", relative(dir, entry.name) + "/");
 						this.explore(entry.name);
 					}
 				}
@@ -108,8 +98,8 @@ export class FileWalker extends EventEmitter {
 	}
 
 	checkDone() {
-		this.fileCount--;
-		if (this.fileCount === 0) {
+		this._fileCount--;
+		if (this._fileCount === 0) {
 			this.emit("end");
 		}
 	}
@@ -126,9 +116,8 @@ export const getStaticPaths = async (dir, extensions) => {
 		const paths = [];
 
 		await new Promise((resolve, reject) => {
-			new FileWalker(dir, {
-				filterFiles: hasExtensions(extensions)
-			})
+			new FileWalker()
+				.filterFiles(hasExtension(extensions))
 				.on("dir", (dir) => {
 					console.debug(`Exploring ${dir}/ for more content`);
 				})
@@ -137,12 +126,14 @@ export const getStaticPaths = async (dir, extensions) => {
 					console.debug(`File ${path} was added to content`);
 				})
 				.on("error", reject)
-				.on("end", resolve);
+				.on("end", resolve)
+				.explore(dir);
 		});
 
 		return paths;
 	} catch (err) {
-		const ERR_MSG = `getStaticPaths(): Error when trying to retrieve a list of content inside "${dir}"`;
+		const ERR_MSG = `getStaticPaths(): Error when trying to retrieve a list of content inside "${dir}"
+${err}`;
 		console.error(ERR_MSG);
 		throw new Error(ERR_MSG);
 	}
