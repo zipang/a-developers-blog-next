@@ -1,15 +1,16 @@
 import path, { dirname } from "path";
 import VFile from "./VFile.js";
-import { getStaticPaths } from "./FileWalker.js";
+import { hasExtension, getStaticPaths } from "./FileWalker.js";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const specFile = path.join(__dirname, "FileWalker.spec.js");
-
 console.log(`Current dir : ${__dirname}`);
-console.log(`File : ${specFile}`);
+const specFile = VFile(path.join(__dirname, "FileWalker.spec.js"));
+isSpecFile = hasExtension(".spec.js")(specFile);
+
+console.log(`File : ${specFile.path} is a spec file : ${isSpecFile}`);
 
 // Filter spec files inside this dir
 const specFiles = getStaticPaths(__dirname, ["spec.js"]);
