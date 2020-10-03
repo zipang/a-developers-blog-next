@@ -1,10 +1,16 @@
-import FileWalker from "./FileWalker.js";
 import test from "baretest";
 import code from "@hapi/code";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+import FileWalker from "./FileWalker.js";
 import { EventEmitter } from "events";
 
 const { expect } = code;
 const testSuite = test("FileWalker");
+
+// REBUILD THE COMMON JS ENV VARIABLES
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * Check the bad parameters
