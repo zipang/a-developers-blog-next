@@ -41,5 +41,12 @@ testSuite(
 		expect(isJsOrTextOrMarkdown(me)).to.be.true();
 	}
 );
+testSuite(
+	"hasExtension('txt', 'md', 'markdown') test if file has at least one of these extensions",
+	() => {
+		const isTextOrMarkdown = hasExtension("txt", "md", "markdown");
+		expect(isTextOrMarkdown(me)).to.be.false();
+	}
+);
 
 testSuite.run();
