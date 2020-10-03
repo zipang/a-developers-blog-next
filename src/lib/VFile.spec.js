@@ -37,8 +37,8 @@ testSuite("hasExtension('.spec.js') can handle a long extension", () => {
 testSuite(
 	"hasExtension('js', 'txt', 'md') test if file has at least one of these extensions",
 	() => {
-		const isSpec = hasExtension(".spec.js");
-		expect(isSpec(me)).to.be.true();
+		const isJsOrTextOrMarkdown = hasExtension("js", "txt", "md");
+		expect(isJsOrTextOrMarkdown(me)).to.be.true();
 	}
 );
 
