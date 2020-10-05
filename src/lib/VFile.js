@@ -29,6 +29,7 @@ export const fileFilters = {
  *   console.log(readmeFile.filename) => "readme"
  *   console.log(readmeFile.dir) => "/project"
  * @param {String} fullpath
+ * @return VFile
  */
 const VFile = (fullpath) => {
 	const { dir, base, ext, name } = parse(fullpath);

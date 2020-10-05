@@ -17,10 +17,12 @@ const me = VFile(__filename);
 /**
  * Check the VFile
  */
-testSuite("VFile exposes simple accessosrs to file path parts", () => {
+testSuite("VFile exposes simple accessors to file path parts", () => {
+	expect(me.filename).to.equal("VFile.spec.js");
 	expect(me.name).to.equal("VFile.spec");
 	expect(me.ext).to.equal("js");
 	expect(me.dir).to.equal(__dirname);
+	expect(me.path).to.equal(__filename);
 });
 
 /**
