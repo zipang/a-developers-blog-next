@@ -1,6 +1,7 @@
-import fs from "fs";
+import fs from "fs-extra";
+import { relative } from "path";
 import EventEmitter from "events";
-import VFile from "./VFile.js";
+import VFile, { hasExtension } from "./VFile.js";
 
 const _DEFAULT_OPTIONS = {
 	filterFiles: () => true,
@@ -17,7 +18,7 @@ export class FileWalker extends EventEmitter {
 	 */
 	constructor({ filterFiles, filterDirs } = _DEFAULT_OPTIONS) {
 		super();
-
+		this._fileCount = 0;
 		this.filterFiles(filterFiles).filterDirs(filterDirs);
 	}
 
@@ -52,8 +53,6 @@ export class FileWalker extends EventEmitter {
 			);
 		}
 
-		this._fileCount = 0;
-
 		try {
 			const entries = await fs.readdir(dir, { withFileTypes: true });
 			this._fileCount += entries.length;
@@ -67,7 +66,7 @@ export class FileWalker extends EventEmitter {
 				} else if (entry.isDirectory()) {
 					if (this._filterDirs(VFile(entry.name))) {
 						this.emit("dir", relative(dir, entry.name) + "/");
-						this.explore(entry.name);
+						await this.explore(entry.name);
 					}
 				}
 				this.checkDone();
