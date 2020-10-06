@@ -1,7 +1,8 @@
 import { contentDir } from "../../next.config";
+import { getStaticPathsFrom } from "../lib/next/FlatFileContentProvider.js";
 import Layout from "../components/Layout";
 
-const AdaptivePage = (...args) => (
+const GenericPage = (...args) => (
 	<Layout>
 		<main>
 			<section className="hero">
@@ -20,18 +21,6 @@ const AdaptivePage = (...args) => (
 /**
  * Scan all the /content dir to find the path to render as pages
  */
-export async function getStaticPaths() {
-	let paths = scanPaths(contentDir);
-	return {
-		paths: [
-			{
-				params: {
-					paths
-				}
-			} // See the "paths" section below
-		],
-		fallback: false // All non existing paths will be handled as 404
-	};
-}
+export const getStaticPaths = getStaticPathsFrom(contentDir, "path");
 
-export default AdaptivePage;
+export default GenericPage;
