@@ -44,11 +44,15 @@ testSuite(
 	}
 );
 testSuite(
-	"hasExtension('txt', 'md', 'markdown') test if file has at least one of these extensions",
+	"hasExtension('txt', 'md', 'markdown') will fail if file has none of these extensions",
 	() => {
 		const isTextOrMarkdown = hasExtension("txt", "md", "markdown");
 		expect(isTextOrMarkdown(me)).to.be.false();
 	}
 );
+testSuite("hasExtension('txt', ['js', 'es', 'mjs']) will flatten all extensions", () => {
+	const isTextOrJs = hasExtension("txt", ["js", "es", "mjs"]);
+	expect(isTextOrJs(me)).to.be.true();
+});
 
 testSuite.run();

@@ -8,7 +8,7 @@ import { parse, dirname } from "path";
 export const hasExtension = (...extensions) => (vfile) => {
 	if (!vfile) return false;
 	const filename = typeof vfile === "string" ? vfile : vfile.filename;
-	return extensions.some((ext) => filename.endsWith(ext));
+	return extensions.flat().some((ext) => filename.endsWith(ext));
 };
 
 /**
