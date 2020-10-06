@@ -13,24 +13,28 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 /**
- * Check the bad parameters
- */
-testSuite("FileWalker will throw on not existing dir", () => {
-	const badInstantiation = () => {
-		const walker = new FileWalker("toto");
-	};
-
-	expect(badInstantiation, "Bad path").to.throw();
-});
-
-/**
  * Check the API
  */
 testSuite("FileWalker can walk is own existing dir", () => {
-	const WalkWithMe = new FileWalker(__dirname);
+	const WalkWithMe = new FileWalker();
 
 	expect(WalkWithMe, "EventEmitter").to.be.an.instanceof(EventEmitter);
 	expect(WalkWithMe.explore, ".explore()").to.be.an.instanceof(Function);
+	expect(WalkWithMe.filterFiles, ".filterFiles()").to.be.an.instanceof(Function);
+	expect(WalkWithMe.filterDirs, ".filterDirs()").to.be.an.instanceof(Function);
+});
+
+/**
+ * Check the bad parameters
+ */
+testSuite("FileWalker.explore() will throw on not existing dir", () => {
+	const walker = new FileWalker();
+
+	const badDirectory = async () => {
+		walker.explore("toto");
+	};
+
+	expect(badDirectory, "Bad path").to.throw();
 });
 
 testSuite.run();
