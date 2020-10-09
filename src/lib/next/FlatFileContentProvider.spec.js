@@ -10,7 +10,7 @@ const testSuite = test("FlatFileContentProvider");
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-import { getStaticPathsFrom } from "./FlatFileContentProvider.js";
+import { getStaticPathsFrom, getStaticPropsFor } from "./FlatFileContentProvider.js";
 
 const runCmd = async () => {
 	const getStaticPaths = getStaticPathsFrom(
@@ -19,6 +19,13 @@ const runCmd = async () => {
 	);
 	const staticPaths = await getStaticPaths();
 	console.log(JSON.stringify(staticPaths));
+
+	// Read back the file for a specific path
+	const getStaticProps = getStaticPropsFor("paths");
+	const navContent = await getStaticProps({
+		params: { paths: ["navigation", "header-navigation"] }
+	});
+	console.log(JSON.stringify(navContent));
 };
 
 runCmd();
