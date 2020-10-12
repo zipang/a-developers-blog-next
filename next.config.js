@@ -1,8 +1,8 @@
 // @ts-nocheck
 // next.config.js
-import path from "path";
+const path = require("path");
 
 module.exports = {
-	contentDir: path.join(__dirname, "content"),
+	contentDir: path.join(process.cwd(), "content"),
 	reactStrictMode: true
 };
