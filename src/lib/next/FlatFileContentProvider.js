@@ -1,11 +1,8 @@
 import { getMatchingPaths } from "../FileWalker.js";
+import { routes } from "./RoutesProvider.js";
 import fs from "fs-extra";
 import { join } from "path";
 import matter from "gray-matter";
-
-// Store the full path to the content files indexed by their relative web URL
-// Eg : blog/jamstack/git-based-cms => /www/my-app/content/blog/jamstack/git-based-cms.md
-const routes = {};
 
 /**
  * Build a Next.JS getStaticPaths() function
@@ -14,7 +11,13 @@ const routes = {};
  * @param {String} propertyName
  * @return {Function}
  */
-export const getStaticPathsFrom = (contentDir, propertyName) => async () => {
+export const getStaticPathsFrom = (
+	contentDir,
+	propertyName,
+	fallback = false
+) => async () => {
+	console.log(`getStaticPathsFrom("${contentDir}", "${propertyName}")`);
+
 	// Search every markdown files inside contentDir
 	let paths = await getMatchingPaths(contentDir, [".md", ".markdown"]);
 
@@ -22,15 +25,18 @@ export const getStaticPathsFrom = (contentDir, propertyName) => async () => {
 		const route = path
 			.toLowerCase()
 			.replace(/\.md|\.markdown$/, "") // remove markdown extension : /home.md => /home
-			.replace(/\\index$/, ""); // remove '/index' : /blog/index => /blog
-		routes[route] = join(contentDir, path);
+			.replace(/index$/, ""); // remove '/index' : /blog/index => /blog
+
+		routes.set(route, join(contentDir, path));
 		// Now return the static paths like that { params : { propertyName: ["path1", "path2"] }}
 		const params = {};
 		params[propertyName] = route.split("/"); // split parts
 		return { params };
 	});
 
-	return { paths };
+	console.dir(`Routes have been gathered : ${routes.toString()}`);
+
+	return { paths, fallback };
 };
 
 /**
@@ -39,16 +45,19 @@ export const getStaticPathsFrom = (contentDir, propertyName) => async () => {
  */
 export const getStaticPropsFor = (paramName) => async ({ params }) => {
 	try {
-		const parts = params[paramName];
-		const path = parts.join("/");
-		const filename = routes[path];
+		console.log(`getStaticPropsFor(${JSON.stringify({ params })})`);
+		const path = params[paramName] ? params[paramName].join("/") : "";
+
+		const filename = routes.get(path);
 		const fileContent = await fs.readFile(filename, "utf8");
 		const props = { ...matter(fileContent) };
 		return { props };
 	} catch (err) {
 		console.error(err);
 		return {
-			content: `Unable to load content for ${params} : ${err}`
+			props: {
+				content: `Unable to load content for ${JSON.stringify(params)} : ${err}`
+			}
 		};
 	}
 };
