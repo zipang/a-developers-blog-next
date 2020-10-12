@@ -1,7 +1,6 @@
 {
 	"name": "next-jamstack-starter",
 	"private": true,
-	"type": "module",
 	"workspaces": [
 		"packages/*"
 	],
@@ -18,7 +17,6 @@
 		"fs-extra": "^9.0.1",
 		"gray-matter": "^4.0.2",
 		"next": "^9.5",
-		"node-sass": "^4.14.1",
 		"rbx": "^2.2.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
