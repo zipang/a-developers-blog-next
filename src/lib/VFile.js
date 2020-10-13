@@ -25,8 +25,9 @@ export const fileFilters = {
  * Easily read properties of a file
  * @example
  *   const readmeFile = VFile("/project/readme.md")
+ *   console.log(readmeFile.filename) => "readme.md"
+ *   console.log(readmeFile.name) => "readme"
  *   console.log(readmeFile.ext) => "md"
- *   console.log(readmeFile.filename) => "readme"
  *   console.log(readmeFile.dir) => "/project"
  * @param {String} fullpath
  * @return VFile

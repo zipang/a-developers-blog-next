@@ -32,6 +32,6 @@ export const getStaticPaths = getStaticPathsFrom(contentDir, "path");
  * Read the `path` params which gives the route to the markdown file to load
  * And return the file content as props
  */
-export const getStaticProps = getStaticPropsFor("path");
+export const getStaticProps = getStaticPropsFor(contentDir, "path");
 
 export default GenericPage;

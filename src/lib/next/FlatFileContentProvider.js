@@ -1,5 +1,4 @@
 import { getMatchingPaths } from "../FileWalker.js";
-import { routes } from "./RoutesProvider.js";
 import fs from "fs-extra";
 import { join } from "path";
 import matter from "gray-matter";
@@ -17,6 +16,7 @@ export const getStaticPathsFrom = (
 	fallback = false
 ) => async () => {
 	console.log(`getStaticPathsFrom("${contentDir}", "${propertyName}")`);
+	const routes = {};
 
 	// Search every markdown files inside contentDir
 	let paths = await getMatchingPaths(contentDir, [".md", ".markdown"]);
@@ -27,14 +27,15 @@ export const getStaticPathsFrom = (
 			.replace(/\.md|\.markdown$/, "") // remove markdown extension : /home.md => /home
 			.replace(/index$/, ""); // remove '/index' : /blog/index => /blog
 
-		routes.set(route, join(contentDir, path));
+		routes[route] = join(contentDir, path);
 		// Now return the static paths like that { params : { propertyName: ["path1", "path2"] }}
 		const params = {};
 		params[propertyName] = route.split("/"); // split parts
 		return { params };
 	});
 
-	console.dir(`Routes have been gathered : ${routes.toString()}`);
+	console.dir(`Routes have been gathered from ${contentDir} : 
+	${JSON.stringify(routes)}`);
 
 	return { paths, fallback };
 };
@@ -43,12 +44,11 @@ export const getStaticPathsFrom = (
  * Read the YAML + Markdown content of the file
  * @param {Context}
  */
-export const getStaticPropsFor = (paramName) => async ({ params }) => {
+export const getStaticPropsFor = (contentDir, paramName) => async ({ params }) => {
 	try {
 		console.log(`getStaticPropsFor(${JSON.stringify({ params })})`);
 		const path = params[paramName] ? params[paramName].join("/") : "";
-
-		const filename = routes.get(path);
+		const filename = getMatchingFileNameFor(contentDir, path);
 		const fileContent = await fs.readFile(filename, "utf8");
 		const props = { ...matter(fileContent) };
 		return { props };
@@ -60,4 +60,15 @@ export const getStaticPropsFor = (paramName) => async ({ params }) => {
 			}
 		};
 	}
+};
+
+const getMatchingFileNameFor = (contentDir, path) => {
+	// 1st candidate : the path with the markdown extension
+	let candidate = join(contentDir, `${path}.md`);
+	if (fs.pathExistsSync(candidate)) return candidate;
+
+	candidate = join(contentDir, path, "index.md");
+	if (fs.pathExistsSync(candidate)) return candidate;
+
+	throw new Error(`Couldn't find content file associated with path ${path}`);
 };
