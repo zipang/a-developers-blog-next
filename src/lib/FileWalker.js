@@ -20,8 +20,8 @@ const checkDirExists = (dir) => {
  */
 export class FileWalker extends EventEmitter {
 	/**
-	 * @constructor
 	 * Build a new FileWalker EventEmitter
+	 * @constructor
 	 * @param String [rootDir="/"]
 	 * @param {FileWalkerOptions} options
 	 */
@@ -133,8 +133,7 @@ export const getMatchingPaths = async (dir, extensions) => {
 
 		return paths;
 	} catch (err) {
-		const ERR_MSG = `getStaticPaths(): Error when trying to retrieve files from "${dir}"
-${err}`;
+		const ERR_MSG = `getStaticPaths(): Error when trying to retrieve files from "${dir}"\n${err}`;
 		console.error(ERR_MSG);
 		throw new Error(ERR_MSG);
 	}
