@@ -41,7 +41,8 @@ export const getStaticPathsFrom = (
 };
 
 /**
- * Read the YAML + Markdown content of the file
+ * Build a function to read the YAML + Markdown content of the file
+ * associated to a path
  * @param {Context}
  */
 export const getStaticPropsFor = (contentDir, paramName) => async ({ params }) => {
@@ -49,8 +50,11 @@ export const getStaticPropsFor = (contentDir, paramName) => async ({ params }) =
 		console.log(`getStaticPropsFor(${JSON.stringify({ params })})`);
 		const path = params[paramName] ? params[paramName].join("/") : "";
 		const filename = getMatchingFileNameFor(contentDir, path);
+		console.log(`Reading page content from ${filename}`);
 		const fileContent = await fs.readFile(filename, "utf8");
-		const props = { ...matter(fileContent) };
+		const { content, data } = matter(fileContent);
+		const props = { content, data };
+		console.dir(props);
 		return { props };
 	} catch (err) {
 		console.error(err);
