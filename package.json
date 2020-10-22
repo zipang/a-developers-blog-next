@@ -29,6 +29,7 @@
 		"@hapi/code": "^8.0.2",
 		"@zeit/next-sass": "^1.0.1",
 		"baretest": "^2.0.0",
+		"gray-matter-loader": "^0.0.10",
 		"postcss-flexbugs-fixes": "^4.2.1",
 		"postcss-import": "^12.0.1",
 		"postcss-preset-env": "^6.7.0"
