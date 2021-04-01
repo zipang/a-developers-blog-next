@@ -32,4 +32,5 @@ fields:
   - three-columns
   - one-column
 pages:
+- content/blog/l-autre.md
 - content/index.md
