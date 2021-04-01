@@ -1,4 +1,29 @@
 ---
 label: QCM
 hide_body: true
-fields: []
+fields:
+- name: question
+  type: textarea
+  default: ''
+  config:
+    required: true
+    wysiwyg: false
+    schema:
+      format: markdown
+  label: Question
+  description: L'énoncé de la question
+- name: choices
+  type: field_group_list
+  fields:
+  - name: response
+    type: text
+    config:
+      required: false
+    label: Réponse
+    description: Une proposition de réponse
+  config:
+    min: 2
+    max: 6
+    labelField: 
+  label: Choix
+  description: La liste des réponses possibles
