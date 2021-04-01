@@ -1,4 +1,23 @@
 ---
 label: Quizz
 hide_body: true
-fields: []
+fields:
+- name: introduction
+  type: textarea
+  default: ''
+  config:
+    required: true
+    wysiwyg: true
+    schema:
+      format: markdown
+  label: Introduction
+  description: Quel est l'objectif de ce quizz ?
+- name: questions
+  type: blocks
+  label: Questions
+  template_types:
+  - qcm
+  config:
+    min: 1
+    max: 
+  description: La liste des questions (à choix multiples)
