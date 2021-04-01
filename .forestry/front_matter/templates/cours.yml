@@ -31,3 +31,13 @@ fields:
     required: false
   label: Présentateur
   description: Votre guide dans ce cours
+- name: content
+  type: blocks
+  label: Contenu
+  template_types:
+  - chapitre-video
+  - quizz
+  config:
+    min: 
+    max: 
+  description: La liste des chapites/quizz à suyivre (en ordre chronologique)
