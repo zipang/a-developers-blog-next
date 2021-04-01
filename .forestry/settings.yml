@@ -5,6 +5,13 @@ admin_path: ''
 webhook_url: 
 sections:
 - type: directory
+  path: cursus
+  label: Cours
+  create: documents
+  match: "**/*"
+  templates:
+  - cours
+- type: directory
   path: content
   label: Pages
   create: all
