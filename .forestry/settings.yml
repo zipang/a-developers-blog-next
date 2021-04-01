@@ -15,7 +15,7 @@ sections:
   create: documents
   match: "*.md"
   templates:
-  - article
+  - free-page
 - type: directory
   path: content/_navigation
   label: Menus (navigation)
