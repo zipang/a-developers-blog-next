@@ -41,3 +41,5 @@ fields:
     min: 
     max: 
   description: La liste des chapites/quizz à suyivre (en ordre chronologique)
+pages:
+- cursus/lancer-sa-premiere-campagne-d-acquisition-facebook.md
