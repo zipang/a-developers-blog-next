@@ -1,43 +1,43 @@
 ---
 new_page_extension: md
 auto_deploy: false
-admin_path: ""
-webhook_url:
+admin_path: ''
+webhook_url: 
 sections:
-    - type: directory
-      path: content
-      label: Pages
-      create: all
-      match: "*"
-    - type: directory
-      path: content/blog
-      label: Articles (blog)
-      create: documents
-      match: "*.md"
-      templates:
-          - article
-    - type: directory
-      path: content/_navigation
-      label: Menus (navigation)
-      create: documents
-      match: "*.md"
-      templates:
-          - menu
-    - type: directory
-      path: content/_metadata
-      label: Global Parameters
-      create: documents
-      match: "*.md"
-      templates:
-          - metadata
-upload_dir: public/img
-public_path: "/img"
-front_matter_path: ""
-use_front_matter_path: false
+- type: directory
+  path: content
+  label: Pages
+  create: all
+  match: "*"
+- type: directory
+  path: content/blog
+  label: Articles (blog)
+  create: documents
+  match: "*.md"
+  templates:
+  - article
+- type: directory
+  path: content/_navigation
+  label: Menus (navigation)
+  create: documents
+  match: "*.md"
+  templates:
+  - menu
+- type: directory
+  path: content/_metadata
+  label: Global Parameters
+  create: documents
+  match: "*.md"
+  templates:
+  - metadata
+upload_dir: blog
+public_path: ''
+front_matter_path: ''
+use_front_matter_path: 
 file_template: ":filename:"
 build:
-    preview_output_directory: ".next"
-    install_dependencies_command: yarn
-    preview_docker_image: forestryio/node:12
-    mount_path: "/srv"
-    instant_preview_command: yarn dev
+  preview_output_directory: ".next"
+  install_dependencies_command: yarn
+  preview_docker_image: forestryio/node:12
+  mount_path: "/srv"
+  instant_preview_command: yarn dev

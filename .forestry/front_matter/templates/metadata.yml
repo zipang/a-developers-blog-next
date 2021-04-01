@@ -33,5 +33,3 @@ fields:
   name: global
   default: true
   description: This means that all these properties will be shared on all pages
-pages:
-- content/metadata/seo-and-global.md
